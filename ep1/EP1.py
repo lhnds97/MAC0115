@@ -25,46 +25,38 @@
 """
 
 # Menssagens:
-mpokebolas = ' Digite o numero N de pokebolas: '
-mgravidade = 'Digite o valor da gravidade: '
-mpcoord_x  = 'Digite a coordenada x (inteiro >= 0) do pokemon: '
-mpcoord_y  = 'Digite a coordenada y (inteiro >= 0) do pokemon: '
-mtcoord_x  = 'Digite a coordenada x (inteiro >= 0) do treinador: '
-mtcoord_y  = 'Digite a coordenada y (inteiro >= 0) do treinador: '
-mycomp     = 'Digite a componente y da velocidade de lancamento: '
-
-mtentaiva  = '\nTentativa {}:\n'
-macertou   = '\nA pokebola atingiu o pokemon.'
-mnacertou  = '\nA pokebola nao atingiu o pokemon.'
-mstatus    = '> t= \t{}\tvy=\t{}\tx=\t{}\ty=\t{}'
+mAcertou   = '\nA pokebola atingiu o pokemon.'
+mNacertou  = '\nA pokebola nao atingiu o pokemon.'
+mStatus    = '> t= \t{}\tvy=\t{}\tx=\t{}\ty=\t{}'
 
 # Dados de entrada
-pokebolas = int(input(mpokebolas))
-gravidade = int(input(mgravidade))
-pcoord_x  = int(input(mpcoord_x))
-pcoord_y  = int(input(mpcoord_y))
+pokebolas = int(input(' Digite o numero N de pokebolas: '))
+gravidade = int(input('Digite o valor da gravidade: '))
+pcoord_x  = int(input('Digite a coordenada x (inteiro >= 0) do pokemon: '))
+pcoord_y  = int(input('Digite a coordenada y (inteiro >= 0) do pokemon: '))
 
 # Constantes:
 dT = 1
 
 acertou = False # Variavel pra definir o break na condição de ter acertado o pokemon
-tentativa = 1 # variavel a ser incrementada em cada tentativa, pra fazer o print do valor na tela
+tentativa = 1 # variavel a ser incrementada em cada tentativa, pra fazer o print do valor
+
 while pokebolas > 0 and acertou == False:
-    print(mtentaiva.format(tentativa))
+    print('\nTentativa {}:\n'.format(tentativa))
     
-    # Entrada de posição do treinador e da velociade:
-    tcoord_x = int(input(mtcoord_x))
-    tcoord_y = int(input(mtcoord_y))
-    ycomp    = int(input(mycomp))
+    # Entrada de posição do treinador e da velociade de lancamento:
+    tcoord_x = int(input('Digite a coordenada x (inteiro >= 0) do treinador: '))
+    tcoord_y = int(input('Digite a coordenada y (inteiro >= 0) do treinador: '))
+    ycomp    = int(input('Digite a componente y da velocidade de lancamento: '))
 
     bcoord_x = tcoord_x
     bcoord_y = tcoord_y
 
 
     t = 0
-    # Condiçoes pra parar a loop: XBy ser menor que 0 ou XBx pasa de XPx
+    # Condiçoes pra parar a loop: XBy ser menor que 0 ou XBx passar de XPx
     while (bcoord_x <= pcoord_x) and (bcoord_y >= 0):
-      print(mstatus.format(t, ycomp, bcoord_x, bcoord_y))
+      print(mStatus.format(t, ycomp, bcoord_x, bcoord_y))
 
       prev_by = bcoord_y # Criar um backup da posição Y pra 
 
@@ -72,7 +64,7 @@ while pokebolas > 0 and acertou == False:
       # e altera o variavel acetou pra quebrar o break do while em que esse
       # esta contido
       if bcoord_x == pcoord_x and bcoord_y == pcoord_y:
-        print(macertou)
+        print(mAcertou)
         acertou = True
         break
       
@@ -87,14 +79,14 @@ while pokebolas > 0 and acertou == False:
     # Pra não imprimir um valor negativo endo que o ultimo valor ja foi 0
     # usa o backup da posicao Y para compara e ver se imprime o numro negativo ou não
     if (bcoord_y < 0 and prev_by != 0 and bcoord_x <= pcoord_x):
-        print(mstatus.format(t, ycomp, bcoord_x, bcoord_y))
+        print(mStatus.format(t, ycomp, bcoord_x, bcoord_y))
 
 
     # Condiçoes pra garantir que esta imprimindo a menssagem de não acertou
     # XB ser diferente de XP e idem para eixo Y 
     if (bcoord_x != pcoord_x and bcoord_y != pcoord_y) or (bcoord_y < 0 and prev_by != 0 and bcoord_x <= pcoord_x):
-      print(mnacertou)
+      print(mNacertou)
       #print(" ")
 
     tentativa += 1 # Incrementa tentativa
-    pokebolas -= 1 # Decrementa tentativa
+    pokebolas -= 1 # Decrementa pokebolas
